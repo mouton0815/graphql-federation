@@ -12,22 +12,32 @@ const schema = buildSchema(`
         city: String
         spouse: Int
     }
-    type Query {
-        hello(id: Int!): Person
+    input PersonInput {
+        name: String
+        year: Int
+        city: String
+        spouse: Int
     }
+    type Query {
+        getPerson(id: ID!): Person
+    }
+    type Mutation {
+        createPerson(input: PersonInput): Person
+        updatePerson(id: ID!, input: PersonInput): Person
+    } 
 `)
 
 const persons = {
-    '1': {
+    1: {
         name: 'Fred',
         year: 2000
     },
-    '2': {
+    2: {
         name: 'Inge',
         city: 'Rome',
         spouse: 3
     },
-    '3': {
+    3: {
         name: 'Fred',
         city: 'Rome',
         spouse: 2
@@ -35,9 +45,24 @@ const persons = {
 }
 
 const rootValue = {
-    hello: ({id}) => {
-        const person = persons[String(id)]
+    getPerson: ({ id }) => {
+        const person = persons[id]
         return person? person : { name: 'Not found' }
+    },
+    createPerson: ({ input }) => {
+        const id = Object.keys(persons).length + 1
+        persons[id] = input
+        return input
+    },
+    updatePerson: ({ id, input }) => {
+        let person = persons[id]
+        if (person) {
+            person = Object.assign({}, person, input)
+            persons[id] = person
+            return person
+        } else {
+            return { name: 'Not found' }
+        }
     }
 }
 
