@@ -1,22 +1,16 @@
-import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
-import externalGlobals from 'rollup-plugin-external-globals'
 
 export default {
-    input: 'src/index.tsx',
+    input: 'src/client/index.tsx',
     output: [{
         file: 'web/index.js',
-        format: 'esm'
+        format: 'iife'
     }],
     plugins: [
         resolve(),
         commonjs(),
-        typescript() /*,
-        externalGlobals({
-            'react': 'React',
-            'react-dom': 'ReactDOM'
-        })
-        */
+        typescript()
     ]
 }

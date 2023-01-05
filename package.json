@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Experiments with GraphQL Federation",
   "type": "module",
-  "main": "src/index.tsx",
+  "main": "src/client/index.tsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mouton0815/graphql-federation.git"
@@ -25,7 +25,6 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "rollup-plugin-typescript2": "^0.34.1",
-    "rollup-plugin-external-globals": "^0.7.1",
     "serve": "^14.1.2",
     "typescript": "^4.9.4"
   }
