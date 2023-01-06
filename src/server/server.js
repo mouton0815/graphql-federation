@@ -18,6 +18,8 @@ const typeDefs = `#graphql
         city: String
     }
     type Query {
+        authors: [Author]
+        books: [Book]
         getAuthor(id: ID!): Author
         getBook(id: ID!): Book
     }
@@ -61,6 +63,12 @@ const AUTHORS = {
 
 const resolvers = {
     Query: {
+        authors: () => {
+            return Object.values(AUTHORS)
+        },
+        books: () => {
+            return Object.values(BOOKS)
+        },
         getAuthor: (root, {id}) => {
             const author = AUTHORS[id]
             if (!author) {
