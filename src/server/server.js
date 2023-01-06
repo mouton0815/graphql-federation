@@ -6,60 +6,81 @@ const PORT = 4000
 const app = express()
 
 const schema = buildSchema(`
-    type Person {
-        name: String!
+    type Book {
+        title: String!
+        lang: String
         year: Int
-        city: String
-        spouse: Int
+        author: Author!
     }
-    input PersonInput {
-        name: String
-        year: Int
+    type Author {
+        name: String!
         city: String
-        spouse: Int
+        books: [Book]
+    }
+    input AuthorInput {
+        name: String
+        city: String
     }
     type Query {
-        getPerson(id: ID!): Person
+        getAuthor(id: ID!): Author
     }
     type Mutation {
-        createPerson(input: PersonInput): Person
-        updatePerson(id: ID!, input: PersonInput): Person
+        createAuthor(input: AuthorInput): Author
+        updateAuthor(id: ID!, input: AuthorInput): Author
     } 
 `)
 
-const persons = {
+const BOOKS = {
+    1: {
+        title: 'His first book',
+        lang: 'en',
+        year: 2000,
+        author: 1
+    },
+    2: {
+        title: 'His second book',
+        year: 2002,
+        author: 1
+    }
+}
+
+const AUTHORS = {
     1: {
         name: 'Fred',
-        year: 2000
+        books: [1,2]
     },
     2: {
         name: 'Inge',
-        city: 'Rome',
-        spouse: 3
+        city: 'Rome'
     },
     3: {
         name: 'Fred',
-        city: 'Rome',
-        spouse: 2
+        city: 'Paris'
     }
 }
 
 const rootValue = {
-    getPerson: ({ id }) => {
-        const person = persons[id]
-        return person? person : { name: 'Not found' }
+    getAuthor: ({ id }) => {
+        let author = AUTHORS[id]
+        if (!author) {
+            throw new Error(`An author with id ${id} does not exist`)
+        }
+        if (author.books) {
+            // console.log('---> before:', author.books)
+            const books = author.books.map(i => BOOKS[i])
+            author = Object.assign({}, author, { books }) // Reassign variable
+            // console.log('---> after:', author.books)
+        }
+        return author
     },
-    createPerson: ({ input }) => {
-        const id = Object.keys(persons).length + 1
-        persons[id] = input
-        return input
+    createAuthor: ({ input }) => {
+        const id = Object.keys(AUTHORS).length + 1
+        return AUTHORS[id] = input
     },
-    updatePerson: ({ id, input }) => {
-        let person = persons[id]
-        if (person) {
-            person = Object.assign({}, person, input)
-            persons[id] = person
-            return person
+    updateAuthor: ({ id, input }) => {
+        let author = AUTHORS[id]
+        if (author) {
+            return AUTHORS[id] = Object.assign({}, author, input)
         } else {
             return { name: 'Not found' }
         }
