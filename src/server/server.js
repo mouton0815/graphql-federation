@@ -1,11 +1,7 @@
-import express from 'express'
-import { graphqlHTTP } from 'express-graphql'
-import { buildSchema } from 'graphql'
+import { ApolloServer } from '@apollo/server'
+import { startStandaloneServer } from '@apollo/server/standalone'
 
-const PORT = 4000
-const app = express()
-
-const schema = buildSchema(`
+const typeDefs = `#graphql
     type Book {
         title: String!
         lang: String
@@ -28,7 +24,7 @@ const schema = buildSchema(`
         createAuthor(input: AuthorInput): Author
         updateAuthor(id: ID!, input: AuthorInput): Author
     } 
-`)
+`
 
 const BOOKS = {
     1: {
@@ -59,40 +55,52 @@ const AUTHORS = {
     }
 }
 
-const rootValue = {
-    getAuthor: ({ id }) => {
-        let author = AUTHORS[id]
-        if (!author) {
-            throw new Error(`An author with id ${id} does not exist`)
+const resolvers = {
+    Query: {
+        getAuthor: (root, {id}) => {
+            const author = AUTHORS[id]
+            if (!author) {
+                throw new Error(`An author with id ${id} does not exist`)
+            }
+            return author
         }
-        if (author.books) {
-            // console.log('---> before:', author.books)
-            const books = author.books.map(i => BOOKS[i])
-            author = Object.assign({}, author, { books }) // Reassign variable
-            // console.log('---> after:', author.books)
-        }
-        return author
     },
-    createAuthor: ({ input }) => {
-        const id = Object.keys(AUTHORS).length + 1
-        return AUTHORS[id] = input
-    },
-    updateAuthor: ({ id, input }) => {
-        let author = AUTHORS[id]
-        if (author) {
+    Mutation: {
+        createAuthor: (root, { input }) => {
+            const id = Object.keys(AUTHORS).length + 1
+            return AUTHORS[id] = input
+        },
+        updateAuthor: (root, { id, input }) => {
+            let author = AUTHORS[id]
+            if (!author) {
+                throw new Error(`An author with id ${id} does not exist`)
+            }
             return AUTHORS[id] = Object.assign({}, author, input)
-        } else {
-            return { name: 'Not found' }
+        }
+    },
+    Author: {
+        books: (author) => {
+            return author.books? author.books.map(i => BOOKS[i]) : []
+        }
+    },
+    Book: {
+        author: (book) => {
+            if (!book.author) {
+                throw new Error(`book ${book} does not have an author`)
+            }
+            const author = AUTHORS[book.author]
+            if (!author) {
+                throw new Error(`An author with id ${book.author} does not exist`)
+            }
+            return author
         }
     }
 }
 
-app.use('/graph', graphqlHTTP({
-    schema,
-    rootValue,
-    graphiql: true
-}))
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+});
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`)
-})
+const { url } = await startStandaloneServer(server)
+console.log(`🚀 Server ready at ${url}`)
