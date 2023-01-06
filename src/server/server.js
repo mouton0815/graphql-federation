@@ -19,6 +19,7 @@ const typeDefs = `#graphql
     }
     type Query {
         getAuthor(id: ID!): Author
+        getBook(id: ID!): Book
     }
     type Mutation {
         createAuthor(input: AuthorInput): Author
@@ -28,15 +29,18 @@ const typeDefs = `#graphql
 
 const BOOKS = {
     1: {
-        title: 'His first book',
+        title: 'Fred´s first book',
         lang: 'en',
         year: 2000,
         author: 1
     },
     2: {
-        title: 'His second book',
+        title: 'Fred´s second book',
         year: 2002,
         author: 1
+    },
+    3: {
+        title: 'Book without author'
     }
 }
 
@@ -63,6 +67,13 @@ const resolvers = {
                 throw new Error(`An author with id ${id} does not exist`)
             }
             return author
+        },
+        getBook: (root, {id}) => {
+            const book = BOOKS[id]
+            if (!book) {
+                throw new Error(`A book with id ${id} does not exist`)
+            }
+            return book
         }
     },
     Mutation: {
@@ -86,7 +97,7 @@ const resolvers = {
     Book: {
         author: (book) => {
             if (!book.author) {
-                throw new Error(`book ${book} does not have an author`)
+                throw new Error(`Book '${book.title}' does not have an author`)
             }
             const author = AUTHORS[book.author]
             if (!author) {
