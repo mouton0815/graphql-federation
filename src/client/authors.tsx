@@ -29,7 +29,7 @@ const AuthorTable = ({authors}: AuthorTableProps): JSX.Element => {
             <td>{name}</td>
             <td>{city}</td>
             <td>
-                <Link to={`/author/${id}`}>more information</Link>
+                <Link to={`/authors/${id}`}>more information</Link>
             </td>
         </tr>
     ))

@@ -1,1 +1,3 @@
-[ ] Separare package.json for client and server
+[ ] Separate package.json for client and server
+[ ] Add /books route
+[ ] Horizontal main men
