@@ -3,12 +3,14 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 const typeDefs = `#graphql
     type Book {
+        id: ID!
         title: String!
         lang: String
         year: Int
         author: Author!
     }
     type Author {
+        id: ID!
         name: String!
         city: String
         books: [Book]
@@ -30,33 +32,45 @@ const typeDefs = `#graphql
 
 const BOOKS = {
     1: {
+        id: 1,
         title: 'Fred´s first book',
         lang: 'en',
         year: 2000,
         author: 1
     },
     2: {
+        id: 2,
         title: 'Fred´s second book',
         year: 2002,
         author: 1
     },
     3: {
+        id: 3,
         title: 'Book without author'
+    },
+    4: {
+        id: 4,
+        title: 'Lars´ interesting book',
+        year: 1999
     }
 }
 
 const AUTHORS = {
     1: {
+        id: 1,
         name: 'Fred',
         books: [1,2]
     },
     2: {
+        id: 2,
         name: 'Inge',
         city: 'Rome'
     },
     3: {
-        name: 'Fred',
-        city: 'Paris'
+        id: 3,
+        name: 'Lars',
+        city: 'Paris',
+        books: [4]
     }
 }
 
@@ -84,7 +98,7 @@ const resolvers = {
     Mutation: {
         createAuthor: (root, { input }) => {
             const id = Object.keys(AUTHORS).length + 1
-            return AUTHORS[id] = input
+            return AUTHORS[id] = Object.assign({ id }, input)
         },
         updateAuthor: (root, { id, input }) => {
             let author = AUTHORS[id]
@@ -116,8 +130,7 @@ const resolvers = {
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers,
-    logger: console
+    resolvers
 });
 
 const { url } = await startStandaloneServer(server)

@@ -6,6 +6,7 @@ import './table.css'
 const GET_AUTHORS = gql`
   query GetAuthors {
     authors {
+      id
       name
       city
     }
@@ -13,8 +14,9 @@ const GET_AUTHORS = gql`
 `
 
 type AuthorProps = {
-    name: string;
-    city: string;
+    id: number
+    name: string
+    city: string
 }
 
 type AuthorTableProps = {
@@ -22,12 +24,12 @@ type AuthorTableProps = {
 }
 
 const AuthorTable = ({authors}: AuthorTableProps): JSX.Element => {
-    const rows = authors.map(({name, city}, index: number) => (
+    const rows = authors.map(({id, name, city}, index: number) => (
         <tr key={index}>
             <td>{name}</td>
             <td>{city}</td>
             <td>
-                <Link to={'/books/' + index}>click here {index}</Link>
+                <Link to={`/books/${id}`}>click here</Link>
             </td>
         </tr>
     ))
