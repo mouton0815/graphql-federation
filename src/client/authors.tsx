@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { gql, useQuery } from '@apollo/client'
 import './table.css'
 
@@ -25,6 +26,9 @@ const AuthorTable = ({authors}: AuthorTableProps): JSX.Element => {
         <tr key={index}>
             <td>{name}</td>
             <td>{city}</td>
+            <td>
+                <Link to={'/books/' + index}>click here {index}</Link>
+            </td>
         </tr>
     ))
     return (
@@ -33,10 +37,11 @@ const AuthorTable = ({authors}: AuthorTableProps): JSX.Element => {
             <tr>
                 <th>Name</th>
                 <th>City</th>
+                <th>Books</th>
             </tr>
             </thead>
             <tbody>
-            {rows}
+                {rows}
             </tbody>
         </table>
     )
@@ -46,6 +51,6 @@ export const Authors = (): JSX.Element => {
     const { loading, error, data } = useQuery(GET_AUTHORS)
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error : {error.message}</p>
-    const authors : Array<AuthorProps> = data.authors
+    const { authors } : AuthorTableProps = data
     return <AuthorTable authors={authors} />
 }

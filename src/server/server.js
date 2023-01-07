@@ -19,9 +19,8 @@ const typeDefs = `#graphql
     }
     type Query {
         authors: [Author]
-        books: [Book]
-        getAuthor(id: ID!): Author
-        getBook(id: ID!): Book
+        author(authorId: ID!): Author
+        book(bookId: ID!): Book
     }
     type Mutation {
         createAuthor(input: AuthorInput): Author
@@ -66,20 +65,18 @@ const resolvers = {
         authors: () => {
             return Object.values(AUTHORS)
         },
-        books: () => {
-            return Object.values(BOOKS)
-        },
-        getAuthor: (root, {id}) => {
-            const author = AUTHORS[id]
+        author: (root, {authorId}) => {
+            console.info('---author--->', authorId)
+            const author = AUTHORS[authorId]
             if (!author) {
-                throw new Error(`An author with id ${id} does not exist`)
+                throw new Error(`An author with id ${authorId} does not exist`)
             }
             return author
         },
-        getBook: (root, {id}) => {
-            const book = BOOKS[id]
+        book: (root, {bookId}) => {
+            const book = BOOKS[bookId]
             if (!book) {
-                throw new Error(`A book with id ${id} does not exist`)
+                throw new Error(`A book with id ${bookId} does not exist`)
             }
             return book
         }
@@ -99,6 +96,7 @@ const resolvers = {
     },
     Author: {
         books: (author) => {
+            console.info('---books--->', author)
             return author.books? author.books.map(i => BOOKS[i]) : []
         }
     },
@@ -119,6 +117,7 @@ const resolvers = {
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    logger: console
 });
 
 const { url } = await startStandaloneServer(server)
