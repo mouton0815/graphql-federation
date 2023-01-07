@@ -1,0 +1,12 @@
+{
+  "getAuthorId": 1,
+  "updateAuthorId": 4,
+  "getBookId": 2,
+  "createAuthorInput": {
+    "name": "Lars",
+    "city": "Halle"
+  },
+  "updateAuthorInput": {
+    "city": "Schkeuditz"
+  }
+}

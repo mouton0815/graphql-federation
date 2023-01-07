@@ -1,0 +1,54 @@
+query Authors {
+  authors {
+    id
+    name
+    books {
+      title
+    }
+  }
+}
+
+query GetAuthor($getAuthorId: ID!  ) {
+  author(authorId: $getAuthorId) {
+    id
+    name
+    city,
+    books {
+      id
+      title
+      year
+      author {
+        name
+      }
+    }
+  }
+}
+
+query GetBook ($getBookId: ID!  ) {
+  book(bookId: $getBookId) {
+    id
+    title
+    year
+    author {
+      id
+      name,
+      books {
+        title
+      }
+    }
+  }
+}
+
+mutation CreateAuthor($createAuthorInput: AuthorInput  ) {
+  createAuthor(input: $createAuthorInput) {
+    id
+    name
+  }
+}
+
+mutation UpdateAuthor($updateAuthorId: ID!, $updateAuthorInput: AuthorInput  ) {
+  updateAuthor(id: $updateAuthorId, input: $updateAuthorInput) {
+    name
+    city
+  }
+}
