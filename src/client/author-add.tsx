@@ -25,6 +25,7 @@ type AuthorInputProps = {
     city?: string
 }
 
+// Derives GraphQL author input from state, which in turn captures form values
 const createAuthorInput = (formState: AuthorInputProps): AuthorInputProps => {
     const result: AuthorInputProps = { name: formState.name }
     if (formState.city) result.city = formState.city
@@ -60,12 +61,8 @@ const AuthorAddPanel = ({enableEdit}: AuthorAddProps): JSX.Element => {
                            value={formState.city}
                            onChange={e => setFormState({...formState, city: e.target.value})} />
                 </label>
-                <p>
-                    <button type="submit" disabled={!formState.name}>Add author</button>
-                </p>
-                <p>
-                    <button onClick={() => {enableEdit(false); reset()}}>Cancel</button>
-                </p>
+                <button type="submit" disabled={!formState.name}>Add author</button>
+                <button onClick={() => {enableEdit(false); reset()}}>Cancel</button>
             </form>
         </Fragment>
     )

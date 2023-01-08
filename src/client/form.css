@@ -1,7 +1,7 @@
-label, input {
+label, input, button {
     display: block;
 }
 
-label {
+label, button {
     margin-bottom: 20px;
 }
