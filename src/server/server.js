@@ -9,6 +9,12 @@ const typeDefs = `#graphql
         year: Int
         author: Author!
     }
+    input BookInput {
+        title: String!
+        lang: String
+        year: Int
+        authorId: ID!
+    }
     type Author {
         id: ID!
         name: String!
@@ -26,8 +32,9 @@ const typeDefs = `#graphql
         book(bookId: ID!): Book
     }
     type Mutation {
-        createAuthor(input: AuthorInput): Author
-        updateAuthor(id: ID!, input: AuthorInput): Author
+        createBook(input: BookInput): Book!
+        createAuthor(input: AuthorInput): Author!
+        updateAuthor(id: ID!, input: AuthorInput): Author!
     } 
 `
 
@@ -52,7 +59,8 @@ const BOOKS = {
     },
     4: {
         id: 4,
-        title: 'Lars´ interesting book',
+        title: 'Le livre intéressant de Lars',
+        lang: 'fr',
         year: 1999,
         author: 3
     }
@@ -102,11 +110,28 @@ const resolvers = {
         }
     },
     Mutation: {
+        createBook: (root, { input }) => {
+            const bookId = Object.keys(BOOKS).length + 1
+            const { authorId, ...fields } = input
+            const author = AUTHORS[authorId]
+            if (!author) {
+                throw new Error(`An author with id ${authorId} does not exist`)
+            }
+            const book = Object.assign({ id: bookId, author: parseInt(authorId) }, fields)
+            // TODO: How can this be done by GraphQL federation??
+            if (author.books) {
+                author.books.push(bookId)
+            } else {
+                author.books = [bookId]
+            }
+            console.info('---created book--->', book)
+            return BOOKS[bookId] = book
+        },
         createAuthor: (root, { input }) => {
-            const id = Object.keys(AUTHORS).length + 1
-            const author = Object.assign({ id }, input)
+            const authorId = Object.keys(AUTHORS).length + 1
+            const author = Object.assign({ id: authorId }, input)
             console.info('---created author--->', author)
-            return AUTHORS[id] = author
+            return AUTHORS[authorId] = author
         },
         updateAuthor: (root, { id, input }) => {
             let author = AUTHORS[id]
