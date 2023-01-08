@@ -18,7 +18,7 @@ const AuthorColumn = ({author}: AuthorColumnProps): JSX.Element => {
         return <td></td>
     }
     const { id, name } = author
-    return <td><Link to={`/books/${id}`}>{name}</Link></td>
+    return <td><Link to={`/authors/${id}`}>{name}</Link></td>
 }
 
 export const BookTable = ({books, withAuthor}: BookTableProps): JSX.Element => {
