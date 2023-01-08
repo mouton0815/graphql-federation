@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { AuthorList } from './author-list'
+import { AuthorTable } from './author-table'
 import { AuthorAdd } from './author-add'
 
 const GET_AUTHORS = gql`
@@ -19,7 +19,7 @@ export const Authors = (): JSX.Element => {
     if (error) return <p>Error : {error.message}</p>
     return (
         <Fragment>
-            <AuthorList authors={data.authors} />
+            <AuthorTable authors={data.authors} />
             <AuthorAdd />
         </Fragment>
     )

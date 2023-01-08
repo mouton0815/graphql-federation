@@ -1,0 +1,21 @@
+.styled-table {
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.styled-table td, .styled-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.styled-table tr:nth-child(even) {background-color: #f2f2f2;}
+
+.styled-table tr:hover {background-color: #ddd;}
+
+.styled-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: SteelBlue;
+    color: white;
+}

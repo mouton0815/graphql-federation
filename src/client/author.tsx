@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import { gql, useQuery } from '@apollo/client'
 import { BookProps } from './book-props'
-import { BookList } from './book-list'
+import { BookTable } from './book-table'
 
 const GET_AUTHOR_WITH_BOOKS = gql`
   query GetAuthorWithBooks($authorId: ID!) {
@@ -28,7 +28,7 @@ const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
         return (
             <Fragment>
                 <p>Books by {name}:</p>
-                <BookList books={books}/>
+                <BookTable books={books}/>
             </Fragment>
         )
     }
