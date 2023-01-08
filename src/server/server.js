@@ -22,6 +22,7 @@ const typeDefs = `#graphql
     type Query {
         authors: [Author]
         author(authorId: ID!): Author
+        books: [Book]
         book(bookId: ID!): Book
     }
     type Mutation {
@@ -51,7 +52,8 @@ const BOOKS = {
     4: {
         id: 4,
         title: 'Lars´ interesting book',
-        year: 1999
+        year: 1999,
+        author: 3
     }
 }
 
@@ -86,6 +88,9 @@ const resolvers = {
                 throw new Error(`An author with id ${authorId} does not exist`)
             }
             return author
+        },
+        books: () => {
+            return Object.values(BOOKS)
         },
         book: (root, {bookId}) => {
             const book = BOOKS[bookId]

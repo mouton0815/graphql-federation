@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import { gql, useQuery } from '@apollo/client'
-import { BookTable } from './book-table'
+import { BookProps } from './book-props'
+import { BookList } from './book-list'
 
 const GET_AUTHOR_WITH_BOOKS = gql`
   query GetAuthorWithBooks($authorId: ID!) {
@@ -9,6 +10,7 @@ const GET_AUTHOR_WITH_BOOKS = gql`
       name
       city  
       books {
+        id  
         title
         year
       }
@@ -16,15 +18,42 @@ const GET_AUTHOR_WITH_BOOKS = gql`
   }
 `
 
-type BookProps = {
-    title: string
-    year: number
+type BookPanelProps = {
+    name: string
+    books: Array<BookProps>
 }
 
-type AuthorProps = {
+const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
+    if (books && books.length > 0) {
+        return (
+            <Fragment>
+                <p>Books by {name}:</p>
+                <BookList books={books}/>
+            </Fragment>
+        )
+    }
+    return <p>No books of {name} available</p>
+}
+
+type AuthorWithBooksProps = {
     name: string
     city: string
     books: Array<BookProps>
+}
+
+type AuthorPanelProps = {
+    author: AuthorWithBooksProps
+}
+
+const AuthorPanel = ({author}: AuthorPanelProps): JSX.Element => {
+    const {name, city, books} = author
+    return (
+        <Fragment>
+            <h3>{name}</h3>
+            {city && <p>{name} lives in <b>{city}</b></p>}
+            <BookPanel name={name} books={books} />
+        </Fragment>
+    )
 }
 
 export const Author = (): JSX.Element => {
@@ -32,12 +61,5 @@ export const Author = (): JSX.Element => {
     const { loading, error, data } = useQuery(GET_AUTHOR_WITH_BOOKS, { variables: { authorId }})
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error : {error.message}</p>
-    const { name, city, books }: AuthorProps = data.author
-    return (
-        <Fragment>
-            <h3>{name}</h3>
-            {city && <p>Lives in <b>{city}</b></p>}
-            {books && books.length > 0 && <BookTable books={books} />}
-        </Fragment>
-    )
+    return <AuthorPanel author={data.author}/>
 }
