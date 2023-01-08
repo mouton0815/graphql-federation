@@ -103,7 +103,9 @@ const resolvers = {
     Mutation: {
         createAuthor: (root, { input }) => {
             const id = Object.keys(AUTHORS).length + 1
-            return AUTHORS[id] = Object.assign({ id }, input)
+            const author = Object.assign({ id }, input)
+            console.info('---created author--->', author)
+            return AUTHORS[id] = author
         },
         updateAuthor: (root, { id, input }) => {
             let author = AUTHORS[id]
@@ -115,7 +117,7 @@ const resolvers = {
     },
     Author: {
         books: (author) => {
-            console.info('---books--->', author)
+            console.info('---get books for--->', author)
             return author.books? author.books.map(i => BOOKS[i]) : []
         }
     },
