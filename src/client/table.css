@@ -5,7 +5,7 @@
 
 .styled-table td, .styled-table th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
 }
 
 .styled-table tr:nth-child(even) {background-color: #f2f2f2;}

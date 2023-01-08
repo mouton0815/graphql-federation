@@ -28,7 +28,7 @@ const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
         return (
             <Fragment>
                 <p>Books by {name}:</p>
-                <BookTable books={books}/>
+                <BookTable books={books} withAuthor={false} />
             </Fragment>
         )
     }

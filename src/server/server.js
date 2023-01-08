@@ -47,7 +47,8 @@ const BOOKS = {
     },
     3: {
         id: 3,
-        title: 'Book without author'
+        title: 'Fred´s third book',
+        author: 1
     },
     4: {
         id: 4,
@@ -61,7 +62,7 @@ const AUTHORS = {
     1: {
         id: 1,
         name: 'Fred',
-        books: [1,2]
+        books: [1,2,3]
     },
     2: {
         id: 2,
@@ -117,7 +118,7 @@ const resolvers = {
     },
     Author: {
         books: (author) => {
-            console.info('---get books for--->', author)
+            console.info('---get books for author--->', author)
             return author.books? author.books.map(i => BOOKS[i]) : []
         }
     },

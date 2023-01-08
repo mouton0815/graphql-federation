@@ -1,18 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { BookProps } from './book-props'
+import { AuthorProps } from './author-props'
 import './table.css'
 
 type BookTableProps = {
     books: Array<BookProps>
+    withAuthor: boolean
 }
 
-export const BookTable = ({books}: BookTableProps): JSX.Element => {
-    const rows = books.map(({id, title, year}, index: number) => (
+type AuthorColumnProps = {
+    author?: AuthorProps
+}
+
+const AuthorColumn = ({author}: AuthorColumnProps): JSX.Element => {
+    if (!author) {
+        return <td></td>
+    }
+    const { id, name } = author
+    return <td><Link to={`/books/${id}`}>{name}</Link></td>
+}
+
+export const BookTable = ({books, withAuthor}: BookTableProps): JSX.Element => {
+    const rows = books.map(({id, title, year, author}, index: number) => (
         <tr key={index}>
             <td>{index + 1}</td>
             <td><Link to={`/books/${id}`}>{title}</Link></td>
             <td>{year}</td>
+            {withAuthor && <AuthorColumn author={author} />}
         </tr>
     ))
     return (
@@ -22,6 +37,7 @@ export const BookTable = ({books}: BookTableProps): JSX.Element => {
                     <th>#</th>
                     <th>Title</th>
                     <th>Year</th>
+                    {withAuthor && <th>Author</th>}
                 </tr>
             </thead>
             <tbody>
