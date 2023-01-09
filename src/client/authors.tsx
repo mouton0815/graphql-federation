@@ -8,6 +8,7 @@ const GET_AUTHORS = gql`
         authors {
             id
             name
+            birth
             city
         }
     }

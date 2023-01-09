@@ -23,11 +23,13 @@ export const authors = [
     {
         id: '1',
         name: 'Kate Chopin',
-        birth: '1850-02-08'
+        birth: '1850-02-08',
+        city: 'St. Louis'
     },
     {
         id: '2',
         name: 'Paul Auster',
-        birth: '1947-02-03'
+        birth: '1947-02-03',
+        city: 'New York'
     }
 ]

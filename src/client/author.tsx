@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import { gql, useQuery } from '@apollo/client'
+import { AuthorProps } from './author-props'
 import { BookProps } from './book-props'
 import { BookTable } from './book-table'
 
 const GET_AUTHOR_WITH_BOOKS = gql`
   query GetAuthorWithBooks($authorId: ID!) {
     author(authorId: $authorId) {
+      id
       name
+      birth
       city  
       books {
         id  
@@ -35,9 +38,7 @@ const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
     return <p>No books of {name} available</p>
 }
 
-type AuthorWithBooksProps = {
-    name: string
-    city: string
+type AuthorWithBooksProps = AuthorProps & {
     books: Array<BookProps>
 }
 
@@ -46,11 +47,12 @@ type AuthorPanelProps = {
 }
 
 const AuthorPanel = ({author}: AuthorPanelProps): JSX.Element => {
-    const {name, city, books} = author
+    const {name, birth, city, books} = author
     return (
         <Fragment>
             <h3>{name}</h3>
-            {city && <p>{name} lives in <b>{city}</b></p>}
+            {birth && <p>{name} was born on {birth}.</p>}
+            {city && <p>{name} lives in {city}.</p>}
             <BookPanel name={name} books={books} />
         </Fragment>
     )
