@@ -1,23 +1,22 @@
-import { AUTHORS, BOOKS } from './data.js'
+import { authors, books } from './data.js'
 
 export const resolvers = {
     Query: {
         authors: () => {
-            return Object.values(AUTHORS)
+            return authors
         },
-        author: (root, {authorId}) => {
-            console.info('---author--->', authorId)
-            const author = AUTHORS[authorId]
+        author: (_, { authorId }) => {
+            const author = authors.find(author => author.id === authorId)
             if (!author) {
                 throw new Error(`An author with id ${authorId} does not exist`)
             }
             return author
         },
         books: () => {
-            return Object.values(BOOKS)
+            return books
         },
-        book: (root, {bookId}) => {
-            const book = BOOKS[bookId]
+        book: (_, { bookId }) => {
+            const book = books.find(book => book.id === bookId)
             if (!book) {
                 throw new Error(`A book with id ${bookId} does not exist`)
             }
@@ -25,52 +24,42 @@ export const resolvers = {
         }
     },
     Mutation: {
-        createBook: (root, { input }) => {
-            const bookId = Object.keys(BOOKS).length + 1
-            const { authorId, ...fields } = input
-            const author = AUTHORS[authorId]
-            if (!author) {
-                throw new Error(`An author with id ${authorId} does not exist`)
-            }
-            const book = Object.assign({ id: bookId, author: parseInt(authorId) }, fields)
-            // TODO: How can this be done by GraphQL federation??
-            if (author.books) {
-                console.info('---append bookId to author.books--->', bookId, author.books)
-                author.books.push(bookId)
-            } else {
-                author.books = [bookId]
-            }
-            console.info('---created book--->', book)
-            return BOOKS[bookId] = book
+            createBook: (_, { input }) => {
+                if (!authors.find(author => author.id === input.authorId)) {
+                    throw new Error(`An author with id ${input.authorId} does not exist`)
+                }
+                const id = (books.length + 1).toString()
+                const book = Object.assign({ id }, input)
+                books.push(book)
+                console.info('---created book--->', book)
+                return book
+            },
+            createAuthor: (_, { input }) => {
+                const id = (authors.length + 1).toString()
+                const author = Object.assign({ id }, input)
+                authors.push(author)
+                console.info('---created author--->', author)
+                return author
+            },
         },
-        createAuthor: (root, { input }) => {
-            const authorId = Object.keys(AUTHORS).length + 1
-            const author = Object.assign({ id: authorId }, input)
-            console.info('---created author--->', author)
-            return AUTHORS[authorId] = author
-        },
-        updateAuthor: (root, { id, input }) => {
-            let author = AUTHORS[id]
-            if (!author) {
-                throw new Error(`An author with id ${id} does not exist`)
-            }
-            return AUTHORS[id] = Object.assign({}, author, input)
-        }
-    },
     Author: {
         books: (author) => {
             console.info('---get books for author--->', author)
-            return author.books? author.books.map(i => BOOKS[i]) : []
+            return books.filter(book => book.authorId === author.id)
         }
     },
     Book: {
         author: (book) => {
-            if (!book.author) {
+            // The errors below indicate bugs or data corruption:
+            // * The schema does not allow to create books w/o author
+            // * The existence of the author is checked on book creation
+            console.info('---get author for book--->', book)
+            if (!book.authorId) {
                 throw new Error(`Book '${book.title}' does not have an author`)
             }
-            const author = AUTHORS[book.author]
+            const author = authors.find(author => author.id === book.authorId)
             if (!author) {
-                throw new Error(`An author with id ${book.author} does not exist`)
+                throw new Error(`An author with id ${book.authorId} does not exist`)
             }
             return author
         }

@@ -2,24 +2,24 @@ export const typeDefs = `#graphql
     type Book {
         id: ID!
         title: String!
-        lang: String
         year: Int
         author: Author!
     }
     input BookInput {
         title: String!
-        lang: String
         year: Int
         authorId: ID!
     }
     type Author {
         id: ID!
         name: String!
+        birth: String
         city: String
         books: [Book]
     }
     input AuthorInput {
         name: String
+        birth: String
         city: String
     }
     type Query {
@@ -31,6 +31,5 @@ export const typeDefs = `#graphql
     type Mutation {
         createBook(input: BookInput): Book!
         createAuthor(input: AuthorInput): Author!
-        updateAuthor(id: ID!, input: AuthorInput): Author!
     }
 `
