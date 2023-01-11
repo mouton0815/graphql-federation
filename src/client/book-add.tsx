@@ -9,7 +9,7 @@ type BookAddProps = {
 }
 
 const BookAddButton = ({enableEdit}: BookAddProps): JSX.Element => (
-    <p><button onClick={() => enableEdit(true)}>Add new book</button></p>
+    <p><button onClick={() => enableEdit(true)}>Add book</button></p>
 )
 
 type BookInputProps = {
@@ -40,10 +40,10 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
                 createBook().then(() => enableEdit(false))
             }}>
                 <label>Name:</label>
-                <input type={'text'} name={'title'} value={title} onChange={e => setTitle(e.target.value)} />
+                <input type='text' name='title' value={title} onChange={e => setTitle(e.target.value)} />
 
                 <label>Year:</label>
-                <input type={'number'} name={'year'} value={year} onChange={e => setYear(e.target.value)} />
+                <input type='number' name='year' value={year} onChange={e => setYear(e.target.value)} />
 
                 <label>Author:</label>
                 <AuthorSelect value={authorId} onChange={setAuthorId} />

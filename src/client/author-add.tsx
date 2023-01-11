@@ -8,7 +8,7 @@ type AuthorAddProps = {
 }
 
 const AuthorAddButton = ({enableEdit}: AuthorAddProps): JSX.Element => (
-    <p><button onClick={() => enableEdit(true)}>Add new author</button></p>
+    <p><button onClick={() => enableEdit(true)}>Add author</button></p>
 )
 
 type AuthorInputProps = {
@@ -41,17 +41,17 @@ const AuthorAddPanel = ({enableEdit}: AuthorAddProps): JSX.Element => {
                 createAuthor().then(() => enableEdit(false))
             }}>
                 <label>Name:</label>
-                <input type={'text'} name={'name'} value={name} onChange={e => setName(e.target.value)} />
+                <input type='text' name='name' value={name} onChange={e => setName(e.target.value)} />
 
-                <label>Birth (yyyy-mm-dd):</label>
-                <input type={'text'} name={'birth'} value={birth} onChange={e => setBirth(e.target.value)} />
+                <label>Birth:</label>
+                <input type='text' name='birth' value={birth} placeholder='yyyy-mm-dd' onChange={e => setBirth(e.target.value)} />
 
                 <label>City:</label>
-                <input type={'text'} name={'city'} value={city} onChange={e => setCity(e.target.value)} />
+                <input type='text' name='city' value={city} onChange={e => setCity(e.target.value)} />
 
                 <div />
                 <div>
-                    <button type="submit" disabled={!name}>Add author</button>
+                    <button type='submit' disabled={!name}>Add author</button>
                     <button className='cancel-button' onClick={() => {enableEdit(false); reset()}}>Cancel</button>
                 </div>
             </form>
