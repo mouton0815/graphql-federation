@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_BOOK, GET_BOOKS } from './book-graphql'
+import { GET_AUTHOR_WITH_BOOKS } from './author-graphql'
 import { AuthorSelect } from './author-select'
 import './form.css'
 
@@ -31,7 +32,10 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
     const [authorId, setAuthorId] = useState<string>('')
     const [createBook, { error, reset }] = useMutation(CREATE_BOOK, {
         variables: { bookInput: createBookInput(title, year, authorId) },
-        refetchQueries: [{query: GET_BOOKS}] // TODO: Also refresh books of selected author
+        refetchQueries: [
+            { query: GET_BOOKS },
+            { query: GET_AUTHOR_WITH_BOOKS, variables: { authorId }}
+        ]
     })
     return (
         <Fragment>
