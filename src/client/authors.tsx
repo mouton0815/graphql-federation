@@ -1,18 +1,8 @@
 import React, { Fragment } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { AuthorTable } from './author-table'
 import { AuthorAdd } from './author-add'
-
-const GET_AUTHORS = gql`
-    query GetAuthors {
-        authors {
-            id
-            name
-            birth
-            city
-        }
-    }
-`
+import { GET_AUTHORS } from './graphql'
 
 export const Authors = (): JSX.Element => {
     const { loading, error, data } = useQuery(GET_AUTHORS)

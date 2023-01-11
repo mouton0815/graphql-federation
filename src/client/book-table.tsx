@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BookProps } from './book-props'
+import { BookArray } from './book-props'
 import { AuthorProps } from './author-props'
 import './table.css'
 
 type BookTableProps = {
-    books: Array<BookProps>
+    books: BookArray
     withAuthor: boolean
 }
 

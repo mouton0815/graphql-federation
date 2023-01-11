@@ -1,16 +1,8 @@
 import React, { Fragment, useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
+import { CREATE_BOOK, GET_BOOKS } from './graphql'
+import { AuthorSelect } from './author-select'
 import './form.css'
-
-const CREATE_BOOK = gql`
-    mutation CreateBook($bookInput: BookInput) {
-        createBook(input: $bookInput) {
-            id
-            title
-            year
-        }
-    }
-`
 
 type BookAddProps = {
     enableEdit: (edit: boolean) => void
@@ -20,70 +12,55 @@ const BookAddButton = ({enableEdit}: BookAddProps): JSX.Element => (
     <p><button onClick={() => enableEdit(true)}>Add new book</button></p>
 )
 
-type  BookFormProps = {
+type BookInputProps = {
     title: string
-    year?: string
+    year?: number
     authorId: string
 }
 
-type  BookInputProps = {
-    title: string
-    year?: number
-    authorId: number
-}
-
 // Derives GraphQL book input from state, which in turn captures form values
-const createBookInput = (formState: BookFormProps): BookInputProps => {
-    const result: BookInputProps = { title: formState.title, authorId: parseInt(formState.authorId) }
-    if (formState.year) result.year = parseInt(formState.year)
+const createBookInput = (title: string, year: string, authorId: string): BookInputProps => {
+    const result: BookInputProps = { title, authorId }
+    if (year) result.year = parseInt(year)
     return result
 }
 
 const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
-    const [formState, setFormState] = useState<BookFormProps>({ title: '', year: '', authorId: '' })
-    const [createBook, { loading, error, reset }] = useMutation(CREATE_BOOK, {
-        variables: { bookInput: createBookInput(formState) },
-        refetchQueries: ['GetBooks']
+    const [title, setTitle] = useState<string>('')
+    const [year, setYear] = useState<string>('')
+    const [authorId, setAuthorId] = useState<string>('')
+    const [createBook, { error, reset }] = useMutation(CREATE_BOOK, {
+        variables: { bookInput: createBookInput(title, year, authorId) },
+        refetchQueries: [{query: GET_BOOKS}] // TODO: Also refresh books of selected author
     })
-    if (loading) return <p>Submitting...</p>
-    if (error) return <p>Error : {error.message}</p>
     return (
         <Fragment>
-            <form onSubmit={e => {
-                e.preventDefault()
-                enableEdit(false)
-                createBook()
+            <form className='styled-form' onSubmit={event => {
+                event.preventDefault()
+                createBook().then(() => enableEdit(false))
             }}>
-                <label>
-                    Name:
-                    <input type={'text'}
-                           name={'title'}
-                           value={formState.title}
-                           onChange={e => setFormState({...formState, title: e.target.value})} />
-                </label>
-                <label>
-                    Year:
-                    <input type={'number'}
-                           name={'year'}
-                           value={formState.year}
-                           onChange={e => setFormState({...formState, year: e.target.value})} />
-                </label>
-                <label>
-                    Author (ID):
-                    <input type={'number'}
-                           name={'authorId'}
-                           value={formState.authorId}
-                           onChange={e => setFormState({...formState, authorId: e.target.value})} />
-                </label>
-                <button type="submit" disabled={!formState.title || !formState.authorId}>Add book</button>
-                <button onClick={() => {enableEdit(false); reset()}}>Cancel</button>
+                <label>Name:</label>
+                <input type={'text'} name={'title'} value={title} onChange={e => setTitle(e.target.value)} />
+
+                <label>Year:</label>
+                <input type={'number'} name={'year'} value={year} onChange={e => setYear(e.target.value)} />
+
+                <label>Author:</label>
+                <AuthorSelect value={authorId} onChange={setAuthorId} />
+
+                <div/>
+                <div>
+                    <button type='submit' disabled={!title || !authorId}>Add book</button>
+                    <button className='cancel-button' onClick={() => {enableEdit(false); reset()}}>Cancel</button>
+                </div>
             </form>
+            {error && <p>Error: {error.message}</p>}
         </Fragment>
     )
 }
 
 export const BookAdd = (): JSX.Element => {
-    const [ editEnabled, enableEdit ] = useState(false)
+    const [ editEnabled, enableEdit ] = useState<boolean>(false)
     return editEnabled
         ? <BookAddPanel enableEdit={enableEdit}/>
         : <BookAddButton enableEdit={enableEdit} />

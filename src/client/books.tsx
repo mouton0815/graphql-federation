@@ -1,21 +1,8 @@
 import React, { Fragment } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { BookTable } from './book-table'
 import { BookAdd } from './book-add'
-
-const GET_BOOKS = gql`
-    query GetBooks {
-        books {
-            id
-            title
-            year
-            author {
-                id
-                name
-            }
-        }
-    }
-`
+import { GET_BOOKS } from './graphql'
 
 export const Books = (): JSX.Element => {
     const { loading, error, data } = useQuery(GET_BOOKS)

@@ -1,6 +1,8 @@
 export type AuthorProps = {
-    id: number
+    id: string
     name: string
     birth: string
     city: string
 }
+
+export type AuthorArray = Array<AuthorProps>

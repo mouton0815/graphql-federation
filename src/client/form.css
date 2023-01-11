@@ -1,7 +1,18 @@
-label, input, button {
-    display: block;
+.styled-form {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 10px;
 }
 
-label, button {
-    margin-bottom: 20px;
+.styled-form label {
+    text-align: right;
+}
+
+.styled-form button {
+    margin-top: 10px;
+}
+
+.styled-form .cancel-button {
+    float: right;
 }

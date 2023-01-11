@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { AuthorProps } from './author-props'
+import { AuthorArray } from './author-props'
 
 export type AuthorTableProps = {
-    authors: Array<AuthorProps>;
+    authors: AuthorArray
 }
 
 export const AuthorTable = ({authors}: AuthorTableProps): JSX.Element => {

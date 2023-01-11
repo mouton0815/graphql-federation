@@ -1,20 +1,8 @@
 import React, {Fragment} from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
-
-const GET_BOOK_WITH_AUTHOR = gql`
-    query GetBookWithAuthor($bookId: ID!) {
-        book(bookId: $bookId) {
-            title
-            year
-            author {
-                id
-                name
-            }
-        }
-    }
-`
+import { GET_BOOK_WITH_AUTHOR } from './graphql'
 
 type BookWithAuthorProps = {
     title: string

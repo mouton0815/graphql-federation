@@ -1,29 +1,14 @@
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
-import { BookProps } from './book-props'
+import { BookArray } from './book-props'
 import { BookTable } from './book-table'
-
-const GET_AUTHOR_WITH_BOOKS = gql`
-  query GetAuthorWithBooks($authorId: ID!) {
-    author(authorId: $authorId) {
-      id
-      name
-      birth
-      city  
-      books {
-        id  
-        title
-        year
-      }
-    }
-  }
-`
+import { GET_AUTHOR_WITH_BOOKS } from './graphql'
 
 type BookPanelProps = {
     name: string
-    books: Array<BookProps>
+    books: BookArray
 }
 
 const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
@@ -39,7 +24,7 @@ const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
 }
 
 type AuthorWithBooksProps = AuthorProps & {
-    books: Array<BookProps>
+    books: BookArray
 }
 
 type AuthorPanelProps = {
