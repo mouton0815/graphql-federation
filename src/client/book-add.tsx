@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CREATE_BOOK, GET_BOOKS } from './graphql'
+import { CREATE_BOOK, GET_BOOKS } from './book-graphql'
 import { AuthorSelect } from './author-select'
 import './form.css'
 

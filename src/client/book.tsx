@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
-import { GET_BOOK_WITH_AUTHOR } from './graphql'
+import { GET_BOOK_WITH_AUTHOR } from './book-graphql'
 
 type BookWithAuthorProps = {
     title: string

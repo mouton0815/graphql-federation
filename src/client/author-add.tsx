@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CREATE_AUTHOR, GET_AUTHORS } from './graphql'
+import { CREATE_AUTHOR, GET_AUTHORS } from './author-graphql'
 import './form.css'
 
 type AuthorAddProps = {

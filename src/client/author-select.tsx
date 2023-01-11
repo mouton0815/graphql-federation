@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_AUTHORS } from './graphql'
+import { GET_AUTHORS } from './author-graphql'
 import { AuthorArray } from "./author-props";
 import './form.css'
 

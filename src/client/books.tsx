@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { useQuery } from '@apollo/client'
 import { BookTable } from './book-table'
 import { BookAdd } from './book-add'
-import { GET_BOOKS } from './graphql'
+import { GET_BOOKS } from './book-graphql'
 
 export const Books = (): JSX.Element => {
     const { loading, error, data } = useQuery(GET_BOOKS)

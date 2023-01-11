@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
 import { BookArray } from './book-props'
 import { BookTable } from './book-table'
-import { GET_AUTHOR_WITH_BOOKS } from './graphql'
+import { GET_AUTHOR_WITH_BOOKS } from './author-graphql'
 
 type BookPanelProps = {
     name: string
