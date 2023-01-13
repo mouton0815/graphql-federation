@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { BookArray } from './book-props'
-import { AuthorProps } from './author-props'
-import './table.css'
+import { AuthorProps } from '../author/author-props'
+import '../table.css'
 
 type BookTableProps = {
     books: BookArray

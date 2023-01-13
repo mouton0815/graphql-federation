@@ -1,10 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Menu } from './menu'
-import { Authors } from './authors'
-import { Author } from './author'
-import { Books } from './books'
-import { Book } from './book'
+import { Authors } from './author/authors'
+import { Author } from './author/author'
+import { Books } from './book/books'
+import { Book } from './book/book'
 import { Home } from './home'
 
 export const Router = (): JSX.Element => (

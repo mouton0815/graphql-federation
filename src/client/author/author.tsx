@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
-import { BookArray } from './book-props'
-import { BookTable } from './book-table'
+import { BookArray } from '../book/book-props'
+import { BookTable } from '../book/book-table'
 import { GET_AUTHOR_WITH_BOOKS } from './author-graphql'
 
 type BookPanelProps = {
