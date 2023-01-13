@@ -8,8 +8,7 @@ import { Book } from './book/book'
 import { Home } from './home'
 import './grid.css'
 
-// TODO: Rename to "App"?
-export const Router = (): JSX.Element => (
+export const App = (): JSX.Element => (
     <BrowserRouter>
         <div className='Grid'>
             <Menu />
