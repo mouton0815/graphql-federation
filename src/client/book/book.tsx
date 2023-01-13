@@ -21,7 +21,7 @@ const BookPanel = ({book}: BookPanelProps): JSX.Element => {
         <Fragment>
             <h3 className='Row'>{title}</h3>
             <div className='Cell'>
-                {year && <p>Published in <b>{year}</b></p>}
+                {year && <div>Published in <b>{year}</b></div>}
                 {author && <p>Written by <Link to={`/authors/${author.id}`}>{author.name}</Link></p>}
             </div>
         </Fragment>

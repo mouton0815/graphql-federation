@@ -38,7 +38,7 @@ const AuthorPanel = ({author}: AuthorPanelProps): JSX.Element => {
         <Fragment>
             <h3 className='Row'>{name}</h3>
             <div className='Cell'>
-                {birth && <p>{name} was born on {birth}.</p>}
+                {birth && <div>{name} was born on {birth}.</div>}
                 {city && <p>{name} lives in {city}.</p>}
                 <BookPanel name={name} books={books} />
             </div>
