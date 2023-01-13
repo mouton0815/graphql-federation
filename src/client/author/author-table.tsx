@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { AuthorArray } from './author-props'
+import '../table.css'
+import '../grid.css'
 
 export type AuthorTableProps = {
     authors: AuthorArray
@@ -16,17 +18,17 @@ export const AuthorTable = ({authors}: AuthorTableProps): JSX.Element => {
         </tr>
     ))
     return (
-        <table className='styled-table'>
+        <table className='styled-table Cell'>
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Birth</th>
-                    <th>City</th>
-                </tr>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Birth</th>
+                <th>City</th>
+            </tr>
             </thead>
             <tbody>
-                {rows}
+            {rows}
             </tbody>
         </table>
     )

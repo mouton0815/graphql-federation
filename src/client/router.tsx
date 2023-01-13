@@ -6,16 +6,20 @@ import { Author } from './author/author'
 import { Books } from './book/books'
 import { Book } from './book/book'
 import { Home } from './home'
+import './grid.css'
 
+// TODO: Rename to "App"?
 export const Router = (): JSX.Element => (
     <BrowserRouter>
-        <Menu />
-        <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/authors' element={<Authors/>} />
-            <Route path='/authors/:authorId' element={<Author/>} />
-            <Route path='/books' element={<Books/>} />
-            <Route path='/books/:bookId' element={<Book/>} />
-        </Routes>
+        <div className='Grid'>
+            <Menu />
+            <Routes>
+                <Route path='/' element={<Home/>} />
+                <Route path='/authors' element={<Authors/>} />
+                <Route path='/authors/:authorId' element={<Author/>} />
+                <Route path='/books' element={<Books/>} />
+                <Route path='/books/:bookId' element={<Book/>} />
+            </Routes>
+        </div>
     </BrowserRouter>
 )

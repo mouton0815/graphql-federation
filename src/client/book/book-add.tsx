@@ -4,13 +4,16 @@ import { CREATE_BOOK, GET_BOOKS } from './book-graphql'
 import { GET_AUTHOR_WITH_BOOKS } from '../author/author-graphql'
 import { AuthorSelect } from '../author/author-select'
 import '../form.css'
+import '../grid.css'
 
 type BookAddProps = {
     enableEdit: (edit: boolean) => void
 }
 
 const BookAddButton = ({enableEdit}: BookAddProps): JSX.Element => (
-    <p><button onClick={() => enableEdit(true)}>Add book</button></p>
+    <div className='Cell'>
+        <button onClick={() => enableEdit(true)}>Add book</button>
+    </div>
 )
 
 type BookInputProps = {
@@ -38,7 +41,7 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
         ]
     })
     return (
-        <Fragment>
+        <div className='Cell'>
             <form className='styled-form' onSubmit={event => {
                 event.preventDefault()
                 createBook().then(() => enableEdit(false))
@@ -59,7 +62,7 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
                 </div>
             </form>
             {error && <p>Error: {error.message}</p>}
-        </Fragment>
+        </div>
     )
 }
 

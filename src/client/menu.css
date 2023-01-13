@@ -1,16 +1,13 @@
 .Menu {
-    list-style-type: none;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: start;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #333;
 }
 
-.Menu li {
-    float: left;
-}
-
-.Menu li a {
+.Menu div a {
     display: block;
     color: white;
     text-align: center;
@@ -18,10 +15,10 @@
     text-decoration: none;
 }
 
-.Menu li a:hover {
+.Menu div a:hover {
     background-color: #111;
 }
 
-.Menu li a:active {
+.Menu div a:active {
     background-color: #555;
 }

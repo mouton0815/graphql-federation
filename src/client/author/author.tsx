@@ -5,6 +5,7 @@ import { AuthorProps } from './author-props'
 import { BookArray } from '../book/book-props'
 import { BookTable } from '../book/book-table'
 import { GET_AUTHOR_WITH_BOOKS } from './author-graphql'
+import '../grid.css'
 
 type BookPanelProps = {
     name: string
@@ -35,10 +36,12 @@ const AuthorPanel = ({author}: AuthorPanelProps): JSX.Element => {
     const {name, birth, city, books} = author
     return (
         <Fragment>
-            <h3>{name}</h3>
-            {birth && <p>{name} was born on {birth}.</p>}
-            {city && <p>{name} lives in {city}.</p>}
-            <BookPanel name={name} books={books} />
+            <h3 className='Row'>{name}</h3>
+            <div className='Cell'>
+                {birth && <p>{name} was born on {birth}.</p>}
+                {city && <p>{name} lives in {city}.</p>}
+                <BookPanel name={name} books={books} />
+            </div>
         </Fragment>
     )
 }

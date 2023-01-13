@@ -2,13 +2,16 @@ import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_AUTHOR, GET_AUTHORS } from './author-graphql'
 import '../form.css'
+import '../grid.css'
 
 type AuthorAddProps = {
     enableEdit: (edit: boolean) => void
 }
 
 const AuthorAddButton = ({enableEdit}: AuthorAddProps): JSX.Element => (
-    <p><button onClick={() => enableEdit(true)}>Add author</button></p>
+    <div className='Cell'>
+        <button onClick={() => enableEdit(true)}>Add author</button>
+    </div>
 )
 
 type AuthorInputProps = {
@@ -35,7 +38,7 @@ const AuthorAddPanel = ({enableEdit}: AuthorAddProps): JSX.Element => {
     })
     if (loading) return <p>Submitting...</p>
     return (
-        <Fragment>
+        <div className='Cell'>
             <form className='styled-form' onSubmit={e => {
                 e.preventDefault()
                 createAuthor().then(() => enableEdit(false))
@@ -56,7 +59,7 @@ const AuthorAddPanel = ({enableEdit}: AuthorAddProps): JSX.Element => {
                 </div>
             </form>
             {error && <p>Error: {error.message}</p>}
-        </Fragment>
+        </div>
     )
 }
 
