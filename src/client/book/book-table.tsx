@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { BookArray } from './book-props'
 import { AuthorProps } from '../author/author-props'
-import '../table.css'
 import '../grid.css'
+import '../table.css'
 
 type BookTableProps = {
     books: BookArray
@@ -32,7 +32,7 @@ export const BookTable = ({books, withAuthor}: BookTableProps): JSX.Element => {
         </tr>
     ))
     return (
-        <table className='styled-table Cell'>
+        <table className='Cell Table'>
             <thead>
                 <tr>
                     <th>#</th>

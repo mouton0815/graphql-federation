@@ -39,7 +39,7 @@ const AuthorAddPanel = ({enableEdit}: AuthorAddProps): JSX.Element => {
     if (loading) return <p>Submitting...</p>
     return (
         <div className='Cell'>
-            <form className='styled-form' onSubmit={e => {
+            <form className='Form' onSubmit={e => {
                 e.preventDefault()
                 createAuthor().then(() => enableEdit(false))
             }}>
@@ -55,7 +55,7 @@ const AuthorAddPanel = ({enableEdit}: AuthorAddProps): JSX.Element => {
                 <div />
                 <div>
                     <button type='submit' disabled={!name}>Add author</button>
-                    <button className='cancel-button' onClick={() => {enableEdit(false); reset()}}>Cancel</button>
+                    <button className='cancel' onClick={() => {enableEdit(false); reset()}}>Cancel</button>
                 </div>
             </form>
             {error && <p>Error: {error.message}</p>}

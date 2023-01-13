@@ -1,17 +1,17 @@
-.styled-form {
+.Form {
     display: grid;
     grid-template-columns: max-content max-content;
     grid-gap: 10px;
 }
 
-.styled-form label {
+.Form label {
     text-align: right;
 }
 
-.styled-form button {
+.Form button {
     margin-top: 10px;
 }
 
-.styled-form .cancel-button {
+.Form .cancel {
     float: right;
 }

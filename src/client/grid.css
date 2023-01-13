@@ -8,11 +8,11 @@
     background-color: red;
 }
 
-.Row {
+.Grid .Row {
     background-color: green;
     grid-column: 1 / span 2;
 }
 
-.Cell {
+.Grid .Cell {
     background-color: yellow;
 }

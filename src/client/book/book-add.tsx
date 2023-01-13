@@ -42,7 +42,7 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
     })
     return (
         <div className='Cell'>
-            <form className='styled-form' onSubmit={event => {
+            <form className='Form' onSubmit={event => {
                 event.preventDefault()
                 createBook().then(() => enableEdit(false))
             }}>
@@ -58,7 +58,7 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
                 <div/>
                 <div>
                     <button type='submit' disabled={!title || !authorId}>Add book</button>
-                    <button className='cancel-button' onClick={() => {enableEdit(false); reset()}}>Cancel</button>
+                    <button className='cancel' onClick={() => {enableEdit(false); reset()}}>Cancel</button>
                 </div>
             </form>
             {error && <p>Error: {error.message}</p>}
