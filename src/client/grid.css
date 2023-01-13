@@ -1,18 +1,14 @@
 .Grid {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: max-content 1fr;
     justify-content: start;
     grid-column-gap: 50px;
     grid-row-gap: 0;
-
-    background-color: red;
 }
 
 .Grid .Row {
-    background-color: green;
     grid-column: 1 / span 2;
 }
 
 .Grid .Cell {
-    background-color: yellow;
 }
