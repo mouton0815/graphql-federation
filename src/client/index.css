@@ -1,3 +1,7 @@
 body {
     font-family: "Segoe UI", sans-serif;
 }
+
+p {
+    margin-top: 0;
+}
