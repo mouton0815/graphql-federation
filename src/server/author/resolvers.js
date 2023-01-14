@@ -22,12 +22,6 @@ export const resolvers = {
             return author
         }
     },
-    Author: {
-        __resolveReference(author_ref){
-            console.info('---resolve ref for author--->', author_ref)
-            return authors.find(author => author.id === author_ref.id)
-        }
-    },
     Book: {
         author: (book) => {
             // The errors below indicate bugs or data corruption:

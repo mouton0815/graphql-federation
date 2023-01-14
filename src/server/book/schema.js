@@ -5,6 +5,7 @@ export const typeDefs = gql`
         id: ID!
         title: String!
         year: Int
+        authorId: ID!
     }
     input BookInput {
         title: String!

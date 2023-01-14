@@ -40,7 +40,8 @@ type Book
   @join__type(graph: BOOKS, key: "id")
 {
   id: ID!
-  author: Author! @join__field(graph: AUTHORS)
+  authorId: ID! @join__field(graph: AUTHORS, external: true) @join__field(graph: BOOKS)
+  author: Author! @join__field(graph: AUTHORS, requires: "authorId")
   title: String! @join__field(graph: BOOKS)
   year: Int @join__field(graph: BOOKS)
 }

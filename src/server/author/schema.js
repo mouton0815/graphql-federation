@@ -14,7 +14,8 @@ export const typeDefs = gql`
     }
     type Book @key(fields: "id") {
         id: ID!
-        author: Author!
+        authorId: ID! @external
+        author: Author! @requires(fields: "authorId")
     }
     type Query {
         authors: [Author]
