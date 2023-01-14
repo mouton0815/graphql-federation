@@ -13,13 +13,31 @@ export const books = [
     },
     {
         id: '3',
+        title: 'Moon Palace',
+        year: 1989,
+        authorId: '2'
+    },
+    {
+        id: '4',
+        title: 'The Book of Illusions',
+        year: 2002,
+        authorId: '2'
+    },
+    {
+        id: '5',
         title: 'Oracle Night',
         year: 2003,
+        authorId: '2',
+    },
+    {
+        id: '6',
+        title: 'Sunset Park',
+        year: 2010,
         authorId: '2',
     }
 ]
 
-export const x_authors = [
+export const authors = [
     {
         id: '1',
         name: 'Kate Chopin',
@@ -34,12 +52,14 @@ export const x_authors = [
     }
 ]
 
+/*
 const foo = () => {
     let foo = x_authors
-    for (let i = 3; i <= 30; ++i) {
+    for (let i = x_authors.length + 1; i <= 30; ++i) {
         foo.push({ id: i.toString(), name: i.toString( )})
     }
     return foo
 }
 
 export const authors = foo()
+*/
