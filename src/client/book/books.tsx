@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import { BookTable } from './book-table'
 import { BookAdd } from './book-add'
@@ -10,10 +10,16 @@ export const Books = (): JSX.Element => {
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error : {error.message}</p>
     return (
-        <Fragment>
-            <h3 className='Row'>Books</h3>
-            <BookTable books={data.books} withAuthor={true} />
-            <BookAdd />
-        </Fragment>
+        <>
+            <div className='Row'>
+                <h3>Books</h3>
+            </div>
+            <div className='ScrollCell'>
+                <BookTable books={data.books} withAuthor={true} />
+            </div>
+            <div className='Cell'>
+                <BookAdd />
+            </div>
+        </>
     )
 }

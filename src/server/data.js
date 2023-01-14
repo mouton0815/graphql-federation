@@ -19,7 +19,7 @@ export const books = [
     }
 ]
 
-export const authors = [
+export const x_authors = [
     {
         id: '1',
         name: 'Kate Chopin',
@@ -33,3 +33,13 @@ export const authors = [
         city: 'New York'
     }
 ]
+
+const foo = () => {
+    let foo = x_authors
+    for (let i = 3; i <= 30; ++i) {
+        foo.push({ id: i.toString(), name: i.toString( )})
+    }
+    return foo
+}
+
+export const authors = foo()

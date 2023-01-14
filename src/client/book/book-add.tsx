@@ -1,19 +1,16 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_BOOK, GET_BOOKS } from './book-graphql'
 import { GET_AUTHOR_WITH_BOOKS } from '../author/author-graphql'
 import { AuthorSelect } from '../author/author-select'
 import '../form.css'
-import '../grid.css'
 
 type BookAddProps = {
     enableEdit: (edit: boolean) => void
 }
 
 const BookAddButton = ({enableEdit}: BookAddProps): JSX.Element => (
-    <div className='Cell'>
-        <button onClick={() => enableEdit(true)}>Add book</button>
-    </div>
+    <button onClick={() => enableEdit(true)}>Add book</button>
 )
 
 type BookInputProps = {
@@ -41,7 +38,7 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
         ]
     })
     return (
-        <div className='Cell'>
+        <>
             <form className='Form' onSubmit={event => {
                 event.preventDefault()
                 createBook().then(() => enableEdit(false))
@@ -62,7 +59,7 @@ const BookAddPanel = ({enableEdit}: BookAddProps): JSX.Element => {
                 </div>
             </form>
             {error && <p>Error: {error.message}</p>}
-        </div>
+        </>
     )
 }
 

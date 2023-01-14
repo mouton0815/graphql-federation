@@ -1,14 +1,22 @@
 .Grid {
     display: grid;
     grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content max-content 1fr;
     justify-content: start;
     grid-column-gap: 50px;
     grid-row-gap: 0;
+    height: 100vh;
 }
 
 .Grid .Row {
+    /* Spans all (two) columns of a grid row */
     grid-column: 1 / span 2;
 }
 
 .Grid .Cell {
+    /* Empty placeholder */
+}
+
+.Grid .ScrollCell {
+    overflow-y: scroll;
 }

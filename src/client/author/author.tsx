@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
@@ -15,13 +15,13 @@ type BookPanelProps = {
 const BookPanel = ({name, books}: BookPanelProps): JSX.Element => {
     if (books && books.length > 0) {
         return (
-            <Fragment>
+            <>
                 <p>Books by {name}:</p>
                 <BookTable books={books} withAuthor={false} />
-            </Fragment>
+            </>
         )
     }
-    return <p>No books of {name} available</p>
+    return <p>No books of {name} available.</p>
 }
 
 type AuthorWithBooksProps = AuthorProps & {
@@ -35,14 +35,16 @@ type AuthorPanelProps = {
 const AuthorPanel = ({author}: AuthorPanelProps): JSX.Element => {
     const {name, birth, city, books} = author
     return (
-        <Fragment>
-            <h3 className='Row'>{name}</h3>
+        <>
+            <div className='Row'>
+                <h3>{name}</h3>
+            </div>
             <div className='Cell'>
                 {birth && <p>{name} was born on {birth}.</p>}
                 {city && <p>{name} lives in {city}.</p>}
                 <BookPanel name={name} books={books} />
             </div>
-        </Fragment>
+        </>
     )
 }
 

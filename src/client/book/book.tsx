@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { AuthorProps } from '../author/author-props'
@@ -18,13 +18,15 @@ type BookPanelProps = {
 const BookPanel = ({book}: BookPanelProps): JSX.Element => {
     const {title, year, author} = book
     return (
-        <Fragment>
-            <h3 className='Row'>{title}</h3>
+        <>
+            <div className='Row'>
+                <h3>{title}</h3>
+            </div>
             <div className='Cell'>
                 {year && <p>Published in <b>{year}</b></p>}
                 {author && <p>Written by <Link to={`/authors/${author.id}`}>{author.name}</Link></p>}
             </div>
-        </Fragment>
+        </>
     )
 }
 
