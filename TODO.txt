@@ -1,7 +1,3 @@
-rover supergraph compose --config src/server/supergraph-config.yaml >src/server/supergraph.graphql
-./router --dev --config router-config.yaml --supergraph src/server/supergraph.graphql
-
-
-[ ] Separate package.json for client and server
+[x] Separate package.json for client and server
 [x] Add /books route
 [x] Horizontal main menu

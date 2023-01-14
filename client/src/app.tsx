@@ -1,12 +1,13 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Menu } from './menu'
-import { Authors } from './author/authors'
-import { Author } from './author/author'
-import { Books } from './book/books'
-import { Book } from './book/book'
+import { Authors } from './authors/authors'
+import { Author } from './authors/author'
+import { Books } from './books/books'
+import { Book } from './books/book'
 import { Home } from './home'
-import './grid.css'
+import './css/body.css'
+import './css/grid.css'
 
 export const App = (): JSX.Element => (
     <BrowserRouter>

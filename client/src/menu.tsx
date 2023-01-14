@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './menu.css'
-import './grid.css'
+import './css/menu.css'
+import './css/grid.css'
 
 export const Menu = (): JSX.Element => (
     <div className='Row Menu'>

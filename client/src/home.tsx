@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './grid.css'
+import './css/grid.css'
 
 export const Home = (): JSX.Element => (
     <div className='Row'>

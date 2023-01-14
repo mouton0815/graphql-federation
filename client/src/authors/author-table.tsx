@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { AuthorArray } from './author-props'
-import '../table.css'
+import '../css/table.css'
 
 export type AuthorTableProps = {
     authors: AuthorArray

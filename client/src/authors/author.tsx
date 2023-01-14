@@ -2,10 +2,10 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { AuthorProps } from './author-props'
-import { BookArray } from '../book/book-props'
-import { BookTable } from '../book/book-table'
+import { BookArray } from '../books/book-props'
+import { BookTable } from '../books/book-table'
 import { GET_AUTHOR_WITH_BOOKS } from './author-graphql'
-import '../grid.css'
+import '../css/grid.css'
 
 type BookPanelProps = {
     name: string

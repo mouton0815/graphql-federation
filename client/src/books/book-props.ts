@@ -1,4 +1,4 @@
-import { AuthorProps } from '../author/author-props'
+import { AuthorProps } from '../authors/author-props'
 
 export type BookProps = {
     id: string

@@ -45,10 +45,3 @@ mutation CreateAuthor($createAuthorInput: AuthorInput  ) {
     name
   }
 }
-
-mutation UpdateAuthor($updateAuthorId: ID!, $updateAuthorInput: AuthorInput  ) {
-  updateAuthor(id: $updateAuthorId, input: $updateAuthorInput) {
-    name
-    city
-  }
-}

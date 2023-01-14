@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { AuthorProps } from '../author/author-props'
+import { AuthorProps } from '../authors/author-props'
 import { GET_BOOK_WITH_AUTHOR } from './book-graphql'
-import '../grid.css'
+import '../css/grid.css'
 
 type BookWithAuthorProps = {
     title: string

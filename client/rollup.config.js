@@ -4,7 +4,7 @@ import typescript from 'rollup-plugin-typescript2'
 import postcss from 'rollup-plugin-postcss'
 
 export default {
-    input: 'src/client/index.tsx',
+    input: 'src/index.tsx',
     output: [{
         file: 'web/index.js',
         format: 'iife'

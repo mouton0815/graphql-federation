@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_BOOK, GET_BOOKS } from './book-graphql'
-import { GET_AUTHOR_WITH_BOOKS } from '../author/author-graphql'
-import { AuthorSelect } from '../author/author-select'
-import '../form.css'
+import { GET_AUTHOR_WITH_BOOKS } from '../authors/author-graphql'
+import { AuthorSelect } from '../authors/author-select'
+import '../css/form.css'
 
 type BookAddProps = {
     enableEdit: (edit: boolean) => void

@@ -29,7 +29,7 @@ export const resolvers = {
             // * The existence of the author is checked on book creation
             console.info('---get author for book--->', book)
             if (!book.authorId) {
-                throw new Error(`Book '${book.title}' does not have an author`)
+                throw new Error(`Book '${book.id}' does not have an author`)
             }
             const author = authors.find(author => author.id === book.authorId)
             if (!author) {

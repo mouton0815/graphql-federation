@@ -2,7 +2,6 @@ import React from 'react'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { createRoot } from 'react-dom/client'
 import { App } from './app'
-import './index.css'
 
 const client = new ApolloClient({
     uri: 'http://localhost:4000/',

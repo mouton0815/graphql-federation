@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { BookTable } from './book-table'
 import { BookAdd } from './book-add'
 import { GET_BOOKS } from './book-graphql'
-import '../grid.css'
+import '../css/grid.css'
 
 export const Books = (): JSX.Element => {
     const { loading, error, data } = useQuery(GET_BOOKS)

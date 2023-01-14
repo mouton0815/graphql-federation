@@ -5,8 +5,5 @@
   "createAuthorInput": {
     "name": "Lars",
     "city": "Halle"
-  },
-  "updateAuthorInput": {
-    "city": "Schkeuditz"
   }
 }
