@@ -1,3 +1,0 @@
-[x] Separate package.json for client and server
-[x] Add /books route
-[x] Horizontal main menu
