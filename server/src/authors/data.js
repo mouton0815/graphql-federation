@@ -10,17 +10,17 @@ export const authors = [
         name: 'Paul Auster',
         birth: '1947-02-03',
         city: 'New York'
+    },
+    {
+        id: '3',
+        name: 'Jennifer Egan',
+        birth: '1962-09-07',
+        city: 'New York'
+    },
+    {
+        id: '4',
+        name: 'T.C. Boyle',
+        birth: '1948-12-02',
+        city: 'Montecito CA'
     }
 ]
-
-/*
-const foo = () => {
-    let foo = x_authors
-    for (let i = x_authors.length + 1; i <= 30; ++i) {
-        foo.push({ id: i.toString(), name: i.toString( )})
-    }
-    return foo
-}
-
-export const authors = foo()
-*/
