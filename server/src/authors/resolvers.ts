@@ -1,11 +1,30 @@
 import { authors } from './data.js'
 
+type AuthorQueryArgs = {
+    authorId: string
+}
+
+type AuthorInput = {
+    name: string
+    birth?: string
+    city?: string
+}
+
+type AuthorCreateArgs = {
+    input: AuthorInput
+}
+
+type BookArg = {
+    id: string
+    authorId: string
+}
+
 export const resolvers = {
     Query: {
         authors: () => {
             return authors
         },
-        author: (_, { authorId }) => {
+        author: (_: any, { authorId }: AuthorQueryArgs) => {
             const author = authors.find(author => author.id === authorId)
             if (!author) {
                 throw new Error(`An author with id ${authorId} does not exist`)
@@ -14,7 +33,7 @@ export const resolvers = {
         }
     },
     Mutation: {
-        createAuthor: (_, {input}) => {
+        createAuthor: (_: any, { input }: AuthorCreateArgs) => {
             const id = (authors.length + 1).toString()
             const author = Object.assign({id}, input)
             authors.push(author)
@@ -23,7 +42,7 @@ export const resolvers = {
         }
     },
     Book: {
-        author: (book) => {
+        author: (book: BookArg) => {
             // The errors below indicate bugs or data corruption:
             // * The schema does not allow to create books w/o author
             // * The existence of the author is checked on book creation

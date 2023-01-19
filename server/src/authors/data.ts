@@ -1,4 +1,11 @@
-export const authors = [
+export type Author = {
+    id: string
+    name: string
+    birth?: string
+    city?: string
+}
+
+export const authors : Array<Author> = [
     {
         id: '1',
         name: 'Kate Chopin',

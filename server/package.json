@@ -10,15 +10,21 @@
   "author": "torsten.schlieder@gmx.net",
   "license": "MIT",
   "scripts": {
+    "tsc": "tsc",
     "build": "rover supergraph compose --config supergraph-config.yaml >supergraph.graphql",
-    "start:authors": "node src/authors/server.js",
-    "start:books": "node src/books/server.js &",
+    "start:authors": "ts-node --esm src/authors/server.ts",
+    "start:books": "ts-node --esm src/books/server.ts &",
     "start:router": "router --dev --config router-config.yaml --supergraph supergraph.graphql"
   },
   "dependencies": {
     "@apollo/server": "^4.3.0",
     "@apollo/subgraph": "^2.2.3",
     "graphql": "^16.6.0",
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "^2.12.6",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
   }
 }

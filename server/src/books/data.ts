@@ -1,4 +1,11 @@
-export const books = [
+export type Book = {
+    id: string
+    title: string
+    year?: number
+    authorId: string
+}
+
+export const books : Array<Book> = [
     {
         id: '1',
         title: 'The Awakening',
