@@ -1,0 +1,11 @@
+{
+  "name": "graphql-federation-router",
+  "version": "1.0.0",
+  "description": "GraphQL Federation Router",
+  "author": "torsten.schlieder@gmx.net",
+  "license": "MIT",
+  "scripts": {
+    "build": "rover supergraph compose --config supergraph-config.yaml >supergraph.graphql",
+    "start": "router --dev --config router-config.yaml --supergraph supergraph.graphql"
+  }
+}

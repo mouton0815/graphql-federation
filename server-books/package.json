@@ -1,0 +1,23 @@
+{
+  "name": "graphql-federation-server-books",
+  "version": "1.0.0",
+  "description": "GraphQL Books Server",
+  "type": "module",
+  "main": "src/server.ts",
+  "author": "torsten.schlieder@gmx.net",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node --esm src/server.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.3.0",
+    "@apollo/subgraph": "^2.2.3",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  }
+}

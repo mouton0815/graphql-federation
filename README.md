@@ -2,8 +2,8 @@
 This is an experimentation and demonstration project for GraphQL federation
 with [Apollo](https://www.apollographql.com/docs/federation/).
 
-The [server](./server) part consists of two Apollo subgraph servers, one for [authors](./server/src/authors)
-and one for [books](./server/src/books). Every subgraph server uses its own separated storage (currently in-memory only).
+The server part consists of two Apollo subgraph servers, one for [authors](./server-authors)
+and one for [books](./server-books). Every subgraph server uses its own separated storage (currently in-memory only).
 The relationships between authors and books are expressed in the local GraphQL schemas of both servers.
 
 The GraphQL schemas exposed by both subgraph servers are composed to a federated "supergraph" schema
@@ -51,22 +51,16 @@ To run the services of this project, you need
 * Apollo [rover](https://www.apollographql.com/docs/federation/quickstart/setup)
 * Apollo [router](https://www.apollographql.com/docs/router/quickstart)
 
-Please make sure that ``rover`` and ``router`` are in your path, so that they are found by the server
-[scripts](./server/package.json).
+Please make sure that ``rover`` and ``router`` are in your path, so that they are found by the server scripts.
 
 ## Server Setup
-From the project root do
-```shell
-cd server
-npm install
-npm run build
-```
-To start the three GraphQL servers, run in different shells
-```shell
-npm run start:authors
-npm run start:books
-npm run start:router
-```
+It is best to run the three servers in different shells.
+The commands in the [router](./router) folder must be started last,
+because ``rover`` needs the two subgraph servers to compose the supergraph schema.
+
+| Shell 1                                                    | Shell 2                                                  | Shell 3                                              |
+|------------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------|
+| <pre>cd server-authors<br/>npm install<br/>npm start</pre> | <pre>cd server-books<br/>npm install<br/>npm start</pre> | <pre>cd router<br/>npm run build<br/>npm start</pre> |
 
 The router is reachable at http://localhost:4000. It runs in dev mode and exposes the
 [Apollo Studio Explorer](https://www.apollographql.com/docs/graphos/explorer/explorer),
@@ -90,9 +84,6 @@ From the project root do
 cd client
 npm install
 npm run build
-```
-To start the frontend server, run
-```shell
 npm start
 ```
 The frontend is reachable at http://localhost:3000
