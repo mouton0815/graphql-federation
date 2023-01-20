@@ -1,29 +1,12 @@
+import { Resolvers } from './generated/resolvers-types.js'
 import { books } from './data.js'
 
-type BookQueryArgs = {
-    bookId: string
-}
-
-type BookInput = {
-    title: string
-    year?: number
-    authorId: string
-}
-
-type BookCreateArgs = {
-    input: BookInput
-}
-
-type AuthorArg = {
-    id: string
-}
-
-export const resolvers = {
+export const resolvers : Resolvers = {
     Query: {
         books: () => {
             return books
         },
-        book: (_: any, { bookId }: BookQueryArgs) => {
+        book: (_, { bookId }) => {
             const book = books.find(book => book.id === bookId)
             if (!book) {
                 throw new Error(`A book with id ${bookId} does not exist`)
@@ -32,7 +15,7 @@ export const resolvers = {
         }
     },
     Mutation: {
-        createBook: (_: any, { input }: BookCreateArgs) => {
+        createBook: (_, { input }) => {
             const id = (books.length + 1).toString()
             const book = Object.assign({ id }, input)
             books.push(book)
@@ -41,7 +24,7 @@ export const resolvers = {
         }
     },
     Author: {
-        books: (author: AuthorArg) => {
+        books: (author) => {
             console.info('---get books for author--->', author)
             return books.filter(book => book.authorId === author.id)
         }

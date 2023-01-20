@@ -1,30 +1,12 @@
+import { Resolvers } from './generated/resolvers-types.js'
 import { authors } from './data.js'
 
-type AuthorQueryArgs = {
-    authorId: string
-}
-
-type AuthorInput = {
-    name: string
-    birth?: string
-    city?: string
-}
-
-type AuthorCreateArgs = {
-    input: AuthorInput
-}
-
-type BookArg = {
-    id: string
-    authorId: string
-}
-
-export const resolvers = {
+export const resolvers : Resolvers  = {
     Query: {
         authors: () => {
             return authors
         },
-        author: (_: any, { authorId }: AuthorQueryArgs) => {
+        author: (_, { authorId }) => {
             const author = authors.find(author => author.id === authorId)
             if (!author) {
                 throw new Error(`An author with id ${authorId} does not exist`)
@@ -33,16 +15,16 @@ export const resolvers = {
         }
     },
     Mutation: {
-        createAuthor: (_: any, { input }: AuthorCreateArgs) => {
+        createAuthor: (_, { input }) => {
             const id = (authors.length + 1).toString()
-            const author = Object.assign({id}, input)
+            const author = Object.assign({ id }, input)
             authors.push(author)
             console.info('---created author--->', author)
             return author
         }
     },
     Book: {
-        author: (book: BookArg) => {
+        author: (book) => {
             // The errors below indicate bugs or data corruption:
             // * The schema does not allow to create books w/o author
             // * The existence of the author is checked on book creation

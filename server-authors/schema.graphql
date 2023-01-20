@@ -5,7 +5,7 @@ type Author @key(fields: "id") {
     city: String
 }
 input AuthorInput {
-    name: String
+    name: String!
     birth: String
     city: String
 }

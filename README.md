@@ -58,9 +58,9 @@ It is best to run the three servers in different shells.
 The commands in the [router](./router) folder must be started last,
 because ``rover`` needs the two subgraph servers to compose the supergraph schema.
 
-| Shell 1                                                    | Shell 2                                                  | Shell 3                                              |
-|------------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------|
-| <pre>cd server-authors<br/>npm install<br/>npm start</pre> | <pre>cd server-books<br/>npm install<br/>npm start</pre> | <pre>cd router<br/>npm run build<br/>npm start</pre> |
+| Shell 1                                                                         | Shell 2                                                                       | Shell 3                                                |
+|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------|
+| <pre>cd server-authors<br/>npm install<br/>npm run generate<br/>npm start</pre> | <pre>cd server-books<br/>npm install<br/>npm run generate<br/>npm start</pre> | <pre>cd router<br/>npm run compose<br/>npm start</pre> |
 
 The router is reachable at http://localhost:4000. It runs in dev mode and exposes the
 [Apollo Studio Explorer](https://www.apollographql.com/docs/graphos/explorer/explorer),

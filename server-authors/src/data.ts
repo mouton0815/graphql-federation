@@ -1,9 +1,4 @@
-export type Author = {
-    id: string
-    name: string
-    birth?: string
-    city?: string
-}
+import { Author } from './generated/resolvers-types'
 
 export const authors : Array<Author> = [
     {

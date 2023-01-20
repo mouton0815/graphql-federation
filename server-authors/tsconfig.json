@@ -5,6 +5,6 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true                                 /* Skip type checking all .d.ts files. */
+    "strict": true
   }
 }
