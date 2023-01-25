@@ -62,7 +62,7 @@ because ``rover`` needs the two subgraph servers to compose the supergraph schem
 |---------------------------------------------------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------|
 | <pre>cd server-authors<br/>npm install<br/>npm run generate<br/>npm start</pre> | <pre>cd server-books<br/>npm install<br/>npm run generate<br/>npm start</pre> | <pre>cd router<br/>npm run compose<br/>npm start</pre> |
 
-The router is reachable at http://localhost:4000. It runs in dev mode and exposes the
+The router listens at http://localhost:4000. It runs in dev mode and exposes the
 [Apollo Studio Explorer](https://www.apollographql.com/docs/graphos/explorer/explorer),
 which allows to play with GraphQL queries and mutations. An example query for testing is
 ```graphql
