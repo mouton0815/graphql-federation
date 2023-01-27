@@ -3,8 +3,8 @@ import { authors, books } from './data.js'
 
 export const resolvers : Resolvers = {
     Query: {
-        authors: () => { return authors },
-        books: () => { return books }
+        authors: () => authors,
+        books: () => books
     },
     Author: {
         books: (author) => {

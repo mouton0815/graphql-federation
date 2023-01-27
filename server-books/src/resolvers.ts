@@ -19,13 +19,11 @@ export const resolvers : Resolvers = {
             const id = (books.length + 1).toString()
             const book = Object.assign({ id }, input)
             books.push(book)
-            console.info('---created book--->', book)
             return book
         }
     },
     Author: {
         books: (author) => {
-            console.info('---get books for author--->', author)
             return books.filter(book => book.authorId === author.id)
         }
     }
